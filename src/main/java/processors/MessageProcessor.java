@@ -6,7 +6,8 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMar
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 
-import java.util.Collections;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MessageProcessor {
     private LawHelpProcessor lawHelpProcessor;
@@ -68,10 +69,18 @@ public class MessageProcessor {
         replyKeyboardMarkup.setResizeKeyboard(true);
         replyKeyboardMarkup.setOneTimeKeyboard(false);
 
+        List<KeyboardRow> keyboardRows = new ArrayList<>();
+
         KeyboardRow mainKeyboardRow = new KeyboardRow();
         mainKeyboardRow.add(new KeyboardButton("Техническая поддержка"));
-        mainKeyboardRow.add(new KeyboardButton("Юридическая поддержка"));
-        replyKeyboardMarkup.setKeyboard(Collections.singletonList(mainKeyboardRow));
+
+        KeyboardRow mainKeyboardRow2 = new KeyboardRow();
+        mainKeyboardRow2.add(new KeyboardButton("Юридическая поддержка"));
+
+        keyboardRows.add(mainKeyboardRow);
+        keyboardRows.add(mainKeyboardRow2);
+
+        replyKeyboardMarkup.setKeyboard(keyboardRows);
 
         sendMessage.setText("В какой помощи Вы нуждаетесь?");
     }

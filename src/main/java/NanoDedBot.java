@@ -1,6 +1,5 @@
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import processors.MessageProcessor;
@@ -8,7 +7,7 @@ import processors.MessageProcessor;
 public class NanoDedBot extends TelegramLongPollingBot {
     private MessageProcessor messageProcessor;
 
-    public NanoDedBot(MessageProcessor messageProcessor) {
+    NanoDedBot(MessageProcessor messageProcessor) {
         this.messageProcessor = messageProcessor;
     }
 
