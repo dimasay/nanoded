@@ -31,10 +31,10 @@ class LawHelpProcessor {
         lawKeyboardRow4.add(new KeyboardButton("Киберполиция"));
 
         KeyboardRow lawKeyboardRow5 = new KeyboardRow();
-        lawKeyboardRow4.add(new KeyboardButton("Назад"));
+        lawKeyboardRow5.add(new KeyboardButton("Назад"));
 
         keyboardRowList.add(lawKeyboardRow);
-        keyboardRowList.add(lawKeyboardRow3);
+        keyboardRowList.add(lawKeyboardRow2);
         keyboardRowList.add(lawKeyboardRow3);
         keyboardRowList.add(lawKeyboardRow4);
         keyboardRowList.add(lawKeyboardRow5);
