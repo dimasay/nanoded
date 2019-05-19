@@ -40,7 +40,6 @@ public class CalculatorSite {
 
         String result = oWebDriver.findElement(By.xpath("//*[@id=\"calc_form\"]/div[8]/h3")).getText();
         sendMessage.setText(result);
-        //todo: получить данные
         calculatorAccess.replace(chatId, new ArrayList<>());
     }
 }
