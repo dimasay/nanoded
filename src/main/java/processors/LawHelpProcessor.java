@@ -4,18 +4,15 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
+import utils.FileUtils;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 class LawHelpProcessor {
     void setLawButtons(SendMessage sendMessage) {
-        ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
-        sendMessage.setReplyMarkup(replyKeyboardMarkup);
-
-        replyKeyboardMarkup.setSelective(true);
-        replyKeyboardMarkup.setResizeKeyboard(true);
-        replyKeyboardMarkup.setOneTimeKeyboard(false);
+        ReplyKeyboardMarkup replyKeyboardMarkup = MessageProcessor.setKeyboard(sendMessage);
 
         List<KeyboardRow> keyboardRowList = new ArrayList<>();
         KeyboardRow lawKeyboardRow = new KeyboardRow();
@@ -41,112 +38,48 @@ class LawHelpProcessor {
 
         replyKeyboardMarkup.setKeyboard(keyboardRowList);
 
-        sendMessage.setText("Какая юридическая помощь Вам нужна?");
+        File file = new File(MessageProcessor.pathToMessages + "юридическаПоддержка.txt");
+        String message = FileUtils.readMessageFromFile(file);
+        sendMessage.setText(message);
     }
 
     void setButtonsForFirstButton(SendMessage sendMessage) {
-        ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
-        sendMessage.setReplyMarkup(replyKeyboardMarkup);
-
-        replyKeyboardMarkup.setSelective(true);
-        replyKeyboardMarkup.setResizeKeyboard(true);
-        replyKeyboardMarkup.setOneTimeKeyboard(false);
-
-        List<KeyboardRow> keyboardRows = new ArrayList<>();
-
-        KeyboardRow mainKeyboardRow = new KeyboardRow();
-        mainKeyboardRow.add(new KeyboardButton("Техническая поддержка"));
-
-        KeyboardRow mainKeyboardRow2 = new KeyboardRow();
-        mainKeyboardRow2.add(new KeyboardButton("Юридическая поддержка"));
-
-        keyboardRows.add(mainKeyboardRow);
-        keyboardRows.add(mainKeyboardRow2);
-
+        ReplyKeyboardMarkup replyKeyboardMarkup = MessageProcessor.setKeyboard(sendMessage);
+        List<KeyboardRow> keyboardRows = MessageProcessor.setMainKeyboardRows();
         replyKeyboardMarkup.setKeyboard(keyboardRows);
 
-        sendMessage.setText("Закон Украины «О защите персональных данных»\n" +
-                "https://cedem.org.ua/ru/library/zakon-ukrayny-o-zashhyte-personalnyh-dannyh/");
-
+        File file = new File(MessageProcessor.pathToMessages + "защитаПерсональныхДанных.txt");
+        String message = FileUtils.readMessageFromFile(file);
+        sendMessage.setText(message);
     }
 
     void setButtonsForSecondButton(SendMessage sendMessage) {
-        ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
-        sendMessage.setReplyMarkup(replyKeyboardMarkup);
-
-        replyKeyboardMarkup.setSelective(true);
-        replyKeyboardMarkup.setResizeKeyboard(true);
-        replyKeyboardMarkup.setOneTimeKeyboard(false);
-
-        List<KeyboardRow> keyboardRows = new ArrayList<>();
-
-        KeyboardRow mainKeyboardRow = new KeyboardRow();
-        mainKeyboardRow.add(new KeyboardButton("Техническая поддержка"));
-
-        KeyboardRow mainKeyboardRow2 = new KeyboardRow();
-        mainKeyboardRow2.add(new KeyboardButton("Юридическая поддержка"));
-
-        keyboardRows.add(mainKeyboardRow);
-        keyboardRows.add(mainKeyboardRow2);
-
+        ReplyKeyboardMarkup replyKeyboardMarkup = MessageProcessor.setKeyboard(sendMessage);
+        List<KeyboardRow> keyboardRows = MessageProcessor.setMainKeyboardRows();
         replyKeyboardMarkup.setKeyboard(keyboardRows);
 
-        sendMessage.setText("Про загальнообов'язкове державне пенсійне страхування\n" +
-                "https://zakon.rada.gov.ua/laws/show/1058-15");
+        File file = new File(MessageProcessor.pathToMessages + "пенсионноеЗаконодательство.txt");
+        String message = FileUtils.readMessageFromFile(file);
+        sendMessage.setText(message);
     }
 
     void setButtonsForThirdButton(SendMessage sendMessage) {
-        ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
-        sendMessage.setReplyMarkup(replyKeyboardMarkup);
-
-        replyKeyboardMarkup.setSelective(true);
-        replyKeyboardMarkup.setResizeKeyboard(true);
-        replyKeyboardMarkup.setOneTimeKeyboard(false);
-
-        List<KeyboardRow> keyboardRows = new ArrayList<>();
-
-        KeyboardRow mainKeyboardRow = new KeyboardRow();
-        mainKeyboardRow.add(new KeyboardButton("Техническая поддержка"));
-
-        KeyboardRow mainKeyboardRow2 = new KeyboardRow();
-        mainKeyboardRow2.add(new KeyboardButton("Юридическая поддержка"));
-
-        keyboardRows.add(mainKeyboardRow);
-        keyboardRows.add(mainKeyboardRow2);
-
+        ReplyKeyboardMarkup replyKeyboardMarkup = MessageProcessor.setKeyboard(sendMessage);
+        List<KeyboardRow> keyboardRows = MessageProcessor.setMainKeyboardRows();
         replyKeyboardMarkup.setKeyboard(keyboardRows);
 
-        sendMessage.setText("Как защитить от взлома домашний ПК\n" +
-                "https://ichip.ru/kak-zashhitit-ot-vzloma-domashnijj-pk.html");
+        File file = new File(MessageProcessor.pathToMessages + "защитаОтВзлома.txt");
+        String message = FileUtils.readMessageFromFile(file);
+        sendMessage.setText(message);
     }
 
     void setButtonsForFourthButton(SendMessage sendMessage) {
-        ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
-        sendMessage.setReplyMarkup(replyKeyboardMarkup);
-
-        replyKeyboardMarkup.setSelective(true);
-        replyKeyboardMarkup.setResizeKeyboard(true);
-        replyKeyboardMarkup.setOneTimeKeyboard(false);
-
-        List<KeyboardRow> keyboardRows = new ArrayList<>();
-
-        KeyboardRow mainKeyboardRow = new KeyboardRow();
-        mainKeyboardRow.add(new KeyboardButton("Техническая поддержка"));
-
-        KeyboardRow mainKeyboardRow2 = new KeyboardRow();
-        mainKeyboardRow2.add(new KeyboardButton("Юридическая поддержка"));
-
-        keyboardRows.add(mainKeyboardRow);
-        keyboardRows.add(mainKeyboardRow2);
-
+        ReplyKeyboardMarkup replyKeyboardMarkup = MessageProcessor.setKeyboard(sendMessage);
+        List<KeyboardRow> keyboardRows = MessageProcessor.setMainKeyboardRows();
         replyKeyboardMarkup.setKeyboard(keyboardRows);
 
-        sendMessage.setText("Причерноморское Управление киберполиции\n" +
-                "Департамент киберполиции НПУ\n" +
-                "Скидановский Спуск, 7а\n" +
-                "Приморский район, Одесса\n" +
-                "+380 (48) 733–52–08\n" +
-                "+380 67–910–35–29\n" +
-                "www.cyberpolice.gov.ua");
+        File file = new File(MessageProcessor.pathToMessages + "киберполиция.txt");
+        String message = FileUtils.readMessageFromFile(file);
+        sendMessage.setText(message);
     }
 }

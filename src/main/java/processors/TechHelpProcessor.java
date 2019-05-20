@@ -4,7 +4,9 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
+import utils.FileUtils;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,78 +40,38 @@ class TechHelpProcessor {
 
         replyKeyboardMarkup.setKeyboard(keyboardRowList);
 
-        sendMessage.setText("Какая техническая помощь Вам нужна?");
+        File file = new File(MessageProcessor.pathToMessages + "техническаяПоддержка.txt");
+        String message = FileUtils.readMessageFromFile(file);
+        sendMessage.setText(message);
     }
 
     void setButtonsForFirstButton(SendMessage sendMessage) {
-        ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
-        sendMessage.setReplyMarkup(replyKeyboardMarkup);
-
-        replyKeyboardMarkup.setSelective(true);
-        replyKeyboardMarkup.setResizeKeyboard(true);
-        replyKeyboardMarkup.setOneTimeKeyboard(false);
-
-        List<KeyboardRow> keyboardRows = new ArrayList<>();
-
-        KeyboardRow mainKeyboardRow = new KeyboardRow();
-        mainKeyboardRow.add(new KeyboardButton("Техническая поддержка"));
-
-        KeyboardRow mainKeyboardRow2 = new KeyboardRow();
-        mainKeyboardRow2.add(new KeyboardButton("Юридическая поддержка"));
-
-        keyboardRows.add(mainKeyboardRow);
-        keyboardRows.add(mainKeyboardRow2);
-
+        ReplyKeyboardMarkup replyKeyboardMarkup = MessageProcessor.setKeyboard(sendMessage);
+        List<KeyboardRow> keyboardRows = MessageProcessor.setMainKeyboardRows();
         replyKeyboardMarkup.setKeyboard(keyboardRows);
 
-        sendMessage.setText("https://www.facebook.com/help/188157731232424?helpref=topq");
+        File file = new File(MessageProcessor.pathToMessages + "регистрациявсоцсети.txt");
+        String message = FileUtils.readMessageFromFile(file);
+        sendMessage.setText(message);
     }
 
     void setButtonsForSecondButton(SendMessage sendMessage) {
-        ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
-        sendMessage.setReplyMarkup(replyKeyboardMarkup);
-
-        replyKeyboardMarkup.setSelective(true);
-        replyKeyboardMarkup.setResizeKeyboard(true);
-        replyKeyboardMarkup.setOneTimeKeyboard(false);
-
-        List<KeyboardRow> keyboardRows = new ArrayList<>();
-
-        KeyboardRow mainKeyboardRow = new KeyboardRow();
-        mainKeyboardRow.add(new KeyboardButton("Техническая поддержка"));
-
-        KeyboardRow mainKeyboardRow2 = new KeyboardRow();
-        mainKeyboardRow2.add(new KeyboardButton("Юридическая поддержка"));
-
-        keyboardRows.add(mainKeyboardRow);
-        keyboardRows.add(mainKeyboardRow2);
-
+        ReplyKeyboardMarkup replyKeyboardMarkup = MessageProcessor.setKeyboard(sendMessage);
+        List<KeyboardRow> keyboardRows = MessageProcessor.setMainKeyboardRows();
         replyKeyboardMarkup.setKeyboard(keyboardRows);
 
-        sendMessage.setText("https://hyperione.com/ustanovit-chrome/");
+        File file = new File(MessageProcessor.pathToMessages + "установкаБраузера.txt");
+        String message = FileUtils.readMessageFromFile(file);
+        sendMessage.setText(message);
     }
 
     void setButtonsForThirdButton(SendMessage sendMessage) {
-        ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
-        sendMessage.setReplyMarkup(replyKeyboardMarkup);
-
-        replyKeyboardMarkup.setSelective(true);
-        replyKeyboardMarkup.setResizeKeyboard(true);
-        replyKeyboardMarkup.setOneTimeKeyboard(false);
-
-        List<KeyboardRow> keyboardRows = new ArrayList<>();
-
-        KeyboardRow mainKeyboardRow = new KeyboardRow();
-        mainKeyboardRow.add(new KeyboardButton("Техническая поддержка"));
-
-        KeyboardRow mainKeyboardRow2 = new KeyboardRow();
-        mainKeyboardRow2.add(new KeyboardButton("Юридическая поддержка"));
-
-        keyboardRows.add(mainKeyboardRow);
-        keyboardRows.add(mainKeyboardRow2);
-
+        ReplyKeyboardMarkup replyKeyboardMarkup = MessageProcessor.setKeyboard(sendMessage);
+        List<KeyboardRow> keyboardRows = MessageProcessor.setMainKeyboardRows();
         replyKeyboardMarkup.setKeyboard(keyboardRows);
 
-        sendMessage.setText("https://support.google.com/websearch/answer/134479?hl=ru");
+        File file = new File(MessageProcessor.pathToMessages + "использованиеПоисковика.txt");
+        String message = FileUtils.readMessageFromFile(file);
+        sendMessage.setText(message);
     }
 }
