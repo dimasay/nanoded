@@ -27,18 +27,20 @@ public class MessageProcessor {
         calculatorAccess = new HashMap<>();
     }
 
-    public SendMessage process(Message message) {
+    public SendMessage processMessage(Message message, Map<String, Boolean> isBuilder) {
         SendMessage sendMessage = new SendMessage();
         sendMessage.setChatId(message.getChatId());
 
-        if (!calculatorAccess.containsKey(message.getChatId().toString())) {
-            calculatorAccess.put(message.getChatId().toString(), new ArrayList<>());
+        String chatId = message.getChatId().toString();
+        if (!calculatorAccess.containsKey(chatId)) {
+            calculatorAccess.put(chatId, new ArrayList<>());
         }
-        chooseAction(message, sendMessage);
+        chooseAction(message, sendMessage, isBuilder);
+
         return sendMessage;
     }
 
-    private void chooseAction(Message message, SendMessage sendMessage) {
+    private void chooseAction(Message message, SendMessage sendMessage, Map<String, Boolean> isBuilder) {
         switch (message.getText()) {
             case "/start":
             case "Назад":
@@ -89,12 +91,39 @@ public class MessageProcessor {
             case "Консультация с юристом":
                 lawHelpProcessor.setConsultButtons(sendMessage);
                 break;
+            case "Номер тех.поддержки":
+                sendMessage.setText("+380668397795 - Саевский Дмитрий, маг 120 уровня");
+                break;
             case "Развлечения":
                 processFun(sendMessage);
+                break;
+            case "Конструктор документов":
+                setBuilderButtons(sendMessage);
+                break;
+            case "Виплата допомоги на поховання":
+                isBuilder.replace(message.getChatId().toString(), true);
+                sendMessage.setText("Введите район и город  управления пенсионного фонда");
                 break;
             default:
                 processDefault(message, sendMessage);
         }
+    }
+
+    private void setBuilderButtons(SendMessage sendMessage) {
+        ReplyKeyboardMarkup replyKeyboardMarkup = MessageProcessor.setKeyboard(sendMessage);
+        List<KeyboardRow> keyboardRows = new ArrayList<>();
+
+        KeyboardRow builderKeyboardRow = new KeyboardRow();
+        builderKeyboardRow.add(new KeyboardButton("Виплата допомоги на поховання"));
+
+        KeyboardRow builderKeyboardRow2 = new KeyboardRow();
+        builderKeyboardRow2.add(new KeyboardButton("Назад"));
+
+        keyboardRows.add(builderKeyboardRow);
+        keyboardRows.add(builderKeyboardRow2);
+
+        replyKeyboardMarkup.setKeyboard(keyboardRows);
+        sendMessage.setText("Выберите тип документа");
     }
 
     private void processFun(SendMessage sendMessage) {
@@ -175,12 +204,16 @@ public class MessageProcessor {
         KeyboardRow mainKeyboardRow3 = new KeyboardRow();
         mainKeyboardRow3.add(new KeyboardButton("Калькулятор коммунальных платежей"));
 
+        KeyboardRow mainKeyboardRow5 = new KeyboardRow();
+        mainKeyboardRow5.add(new KeyboardButton("Конструктор документов"));
+
         KeyboardRow mainKeyboardRow4 = new KeyboardRow();
         mainKeyboardRow4.add(new KeyboardButton("Развлечения"));
 
         keyboardRows.add(mainKeyboardRow);
         keyboardRows.add(mainKeyboardRow2);
         keyboardRows.add(mainKeyboardRow3);
+        keyboardRows.add(mainKeyboardRow5);
         keyboardRows.add(mainKeyboardRow4);
 
         return keyboardRows;

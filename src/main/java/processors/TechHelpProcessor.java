@@ -33,9 +33,13 @@ class TechHelpProcessor {
         KeyboardRow lawKeyboardRow4 = new KeyboardRow();
         lawKeyboardRow4.add(new KeyboardButton("Назад"));
 
+        KeyboardRow lawKeyboard5 = new KeyboardRow();
+        lawKeyboard5.add(new KeyboardButton("Номер тех.поддержки"));
+
         keyboardRowList.add(lawKeyboardRow);
         keyboardRowList.add(lawKeyboardRow2);
         keyboardRowList.add(lawKeyboardRow3);
+        keyboardRowList.add(lawKeyboard5);
         keyboardRowList.add(lawKeyboardRow4);
 
         replyKeyboardMarkup.setKeyboard(keyboardRowList);
