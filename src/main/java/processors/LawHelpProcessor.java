@@ -28,13 +28,17 @@ class LawHelpProcessor {
         lawKeyboardRow4.add(new KeyboardButton("Киберполиция"));
 
         KeyboardRow lawKeyboardRow5 = new KeyboardRow();
-        lawKeyboardRow5.add(new KeyboardButton("Назад"));
+        lawKeyboardRow5.add(new KeyboardButton("Консультация с юристом"));
+
+        KeyboardRow lawKeyboardRow6 = new KeyboardRow();
+        lawKeyboardRow6.add(new KeyboardButton("Назад"));
 
         keyboardRowList.add(lawKeyboardRow);
         keyboardRowList.add(lawKeyboardRow2);
         keyboardRowList.add(lawKeyboardRow3);
         keyboardRowList.add(lawKeyboardRow4);
         keyboardRowList.add(lawKeyboardRow5);
+        keyboardRowList.add(lawKeyboardRow6);
 
         replyKeyboardMarkup.setKeyboard(keyboardRowList);
 
@@ -79,6 +83,16 @@ class LawHelpProcessor {
         replyKeyboardMarkup.setKeyboard(keyboardRows);
 
         File file = new File(MessageProcessor.pathToMessages + "киберполиция.txt");
+        String message = FileUtils.readMessageFromFile(file);
+        sendMessage.setText(message);
+    }
+
+    public void setConsultButtons(SendMessage sendMessage) {
+        ReplyKeyboardMarkup replyKeyboardMarkup = MessageProcessor.setKeyboard(sendMessage);
+        List<KeyboardRow> keyboardRows = MessageProcessor.setMainKeyboardRows();
+        replyKeyboardMarkup.setKeyboard(keyboardRows);
+
+        File file = new File(MessageProcessor.pathToMessages + "консультацияСЮристом.txt");
         String message = FileUtils.readMessageFromFile(file);
         sendMessage.setText(message);
     }

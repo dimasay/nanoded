@@ -7,9 +7,7 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMar
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 import selenium.CalculatorSite;
-import utils.FileUtils;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -88,15 +86,23 @@ public class MessageProcessor {
                 calculatorAccess.replace(message.getChatId().toString(), calcListE);
                 sendMessage.setText("Введите старые показания счетчика:");
                 break;
+            case "Консультация с юристом":
+                lawHelpProcessor.setConsultButtons(sendMessage);
+                break;
+            case "Развлечения":
+                processFun(sendMessage);
+                break;
             default:
                 processDefault(message, sendMessage);
         }
     }
 
-    private void setDoc(SendMessage sendMessage) {
-        File file = new File(pathToMessages + "1.txt");
-        String message = FileUtils.readMessageFromFile(file);
-        sendMessage.setText(message);
+    private void processFun(SendMessage sendMessage) {
+        ReplyKeyboardMarkup replyKeyboardMarkup = MessageProcessor.setKeyboard(sendMessage);
+        List<KeyboardRow> keyboardRows = MessageProcessor.setMainKeyboardRows();
+        replyKeyboardMarkup.setKeyboard(keyboardRows);
+
+        sendMessage.setText("https://t.me/nanodedFun");
     }
 
     private void processDefault(Message message, SendMessage sendMessage) {
@@ -169,11 +175,13 @@ public class MessageProcessor {
         KeyboardRow mainKeyboardRow3 = new KeyboardRow();
         mainKeyboardRow3.add(new KeyboardButton("Калькулятор коммунальных платежей"));
 
-
+        KeyboardRow mainKeyboardRow4 = new KeyboardRow();
+        mainKeyboardRow4.add(new KeyboardButton("Развлечения"));
 
         keyboardRows.add(mainKeyboardRow);
         keyboardRows.add(mainKeyboardRow2);
         keyboardRows.add(mainKeyboardRow3);
+        keyboardRows.add(mainKeyboardRow4);
 
         return keyboardRows;
     }
