@@ -33,6 +33,10 @@ public class NanoDedBot extends TelegramLongPollingBot {
         if (!isBuilder.containsKey(chatId)) {
             isBuilder.put(chatId, false);
         }
+        if (isBuilder.get(chatId) && message.getText().equals("Назад")) {
+            isBuilder.replace(chatId, false);
+            userBuilderData.remove(chatId);
+        }
         if (isBuilder.get(chatId)) {
             if (!userBuilderData.containsKey(chatId)) {
                 userBuilderData.put(chatId, new HashMap<>());
